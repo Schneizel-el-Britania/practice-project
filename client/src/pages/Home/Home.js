@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Header from '../../components/Header/Header';
 import CONSTANTS from '../../constants';
 import SlideBar from '../../components/SlideBar/SlideBar';
+import StartContest from '../../components/HomeComponents/StartContest'
 import Footer from '../../components/Footer/Footer';
 import styles from './Home.module.sass';
 import carouselConstants from '../../carouselConstants';
@@ -214,6 +215,7 @@ const Home = (props) => {
               />
             </div>
           </div>
+          <StartContest />
           <Footer />
         </>
       )}
