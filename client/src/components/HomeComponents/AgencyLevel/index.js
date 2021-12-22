@@ -27,28 +27,31 @@ export default function AgencyLevel() {
   }))
 
   return (
-    <section className={styles.container}>
-      {
-        articles.map((article, index) =>
-          <article className={styles.article} key={index}>
-            <span
-              onMouseEnter={() => updateHover(index, true)}
-              onMouseLeave={() => updateHover(index, false)}
-              style={setIconColor(iconColors[index], index)}
-              className={styles.icon}
-            >
+    <div>
+      <h2 className={styles.header}>agency level experience</h2>
+      <section className={styles.container}>
+        {
+          articles.map((article, index) =>
+            <article className={styles.article} key={index}>
               <span
-                className={cx("fa-2x", article.icon, styles.innerIcon)}
-                alt={article.title}
-              />
-            </span>
-            <h2 className={styles.title}>{article.title}</h2>
-            <p className={styles.desc}>
-              {article.desc}
-              <a href={article.link}>learn more</a>
-            </p>
-          </article>)
-      }
-    </section>
+                onMouseEnter={() => updateHover(index, true)}
+                onMouseLeave={() => updateHover(index, false)}
+                style={setIconColor(iconColors[index], index)}
+                className={styles.icon}
+              >
+                <span
+                  className={cx("fa-2x", article.icon, styles.innerIcon)}
+                  alt={article.title}
+                />
+              </span>
+              <h3 className={styles.title}>{article.title}</h3>
+              <p className={styles.desc}>
+                {article.desc}
+                <a href={article.link}>learn more</a>
+              </p>
+            </article>)
+        }
+      </section>
+    </div>
   )
 }
