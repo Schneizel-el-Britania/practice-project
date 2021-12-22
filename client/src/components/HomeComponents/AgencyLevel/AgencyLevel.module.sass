@@ -1,0 +1,50 @@
+$text-color: #77838f;
+$link-color: #97a4af;
+$link-hover-color: #0056b3;
+  
+  .container
+  padding-bottom: 2rem
+  display: flex
+  justify-content: center
+  flex-direction: column
+  @media screen and (min-width: 768px)
+    flex-direction: row
+
+.article
+  max-width: 350px
+  padding: 2rem
+  text-align: center
+  @media screen and (max-width: 768px)
+    margin: auto
+
+.icon
+  width: 3.125rem
+  height: 3.125rem
+  margin-bottom: 2rem
+  display: inline-block
+  border-radius: 50%
+  position: relative
+
+.innerIcon
+  position: absolute
+  top: 45%
+  left: 0
+  right: 0
+
+.title
+  margin-bottom: 0.8rem
+  line-height: 1.2
+  font-size: 1.25rem
+  text-transform: capitalize
+
+.desc
+  color: $text-color
+  line-height: 1.4
+  &>a
+    color: $link-color
+    text-decoration: none
+    border-bottom: 1px dashed $link-color
+    text-transform: capitalize
+    &:hover
+      color: $link-hover-color
+      border-color: $link-hover-color
