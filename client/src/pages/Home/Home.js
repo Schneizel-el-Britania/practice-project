@@ -10,6 +10,7 @@ import styles from './Home.module.sass';
 import carouselConstants from '../../carouselConstants';
 import Spinner from '../../components/Spinner/Spinner';
 import AgencyLevel from '../../components/HomeComponents/AgencyLevel';
+import PricingPage from '../PricingPage';
 
 const Home = (props) => {
   const [index, setIndex] = useState(0);
@@ -32,8 +33,11 @@ const Home = (props) => {
   return (
     <>
       <Header />
-      {isFetching ? <Spinner /> : (
+      {isFetching ? <Spinner /> : ( 
         <>
+          <div className={styles.pricingContainer}>
+            <Link to="/squadhelpPricing" className={styles.pricingPage}>Pricing Page</Link>
+          </div>
           <div className={styles.container}>
             <div className={styles.headerBar}>
               <div className={styles.headline}>
@@ -67,7 +71,7 @@ const Home = (props) => {
                     name ideas from world's largest community of naming experts.
                     With 75,000+ creatives and 15,000+ successful naming projects,
                     Squadhelp is by far the largest naming platform across the globe .
-</p>
+                  </p>
                 </div>
                 <div className={styles.card}>
                   <img
@@ -80,7 +84,7 @@ const Home = (props) => {
                     we ensure that you receive more ideas from our top-quality creatives,
                     and Gamification best practices ensure two-way communication throughout your
                     contest.
-</p>
+                  </p>
                 </div>
                 <div className={styles.card}>
                   <img
@@ -93,7 +97,7 @@ const Home = (props) => {
                     demographics to get unbiased feedback on your favorite names.
                     Also receive Trademark support from our team of Licensed Trademark Attorneys,
                     so you can pick your name with confidence.
-</p>
+                  </p>
                 </div>
               </div>
             </div>
@@ -148,9 +152,9 @@ const Home = (props) => {
                   <p>
                     <i className="fas fa-check" />
                     <span>
-                        We’ll walk you through exactly what you need to share about your project
-                        in order to get an awesome Name
-</span>
+                      We’ll walk you through exactly what you need to share about your project
+                      in order to get an awesome Name
+                    </span>
                   </p>
                 </div>
                 <img src={`${CONSTANTS.STATIC_IMAGES_PATH}gif/1-compressed.gif`} alt="compressed" />
