@@ -1,0 +1,29 @@
+$space: 1rem
+
+.container
+  display: flex
+  flex-wrap: wrap
+  >*
+    flex: 1 1 auto
+    padding: 0 $space
+
+.header
+  border: 10px solid black
+
+.body
+  display: none
+  @media screen and (min-width: 768px)
+    display: block
+
+.link
+  display: inline
+
+.listItem
+  padding: $space 0
+  border-bottom: 2px solid rgb(221, 221, 221)
+
+.benefitsItem
+  padding: $space/2 0
+
+.paragrath + .paragrath
+  padding-top: $space
