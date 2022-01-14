@@ -1,6 +1,8 @@
 import React from 'react';
 import pricingData from './pricingData.json'
 import styles from './Pricing.module.sass';
+import ListItem from './ListItem';
+
 
 export default function Pricing() {
 
@@ -12,17 +14,19 @@ export default function Pricing() {
   );
 
   const getBenefits = (item) =>
-    item.benefits ? <ul>
-      {item.benefits.map((item) =>
-        <li className={styles.benefitsItem}>{item.content}</li>
-      )}
-    </ul> : null
+    <ul>{
+      item.benefits.map((benefit) =>
+        <ListItem className={styles.benefitsItem} popupContent={benefit.desc}>
+          {benefit.content}
+        </ListItem>
+      )
+    }</ul>
 
-  const getListItems = (item) => item.body.map((listItem) =>
-    <li className={styles.listItem}>
-      {Array.isArray(listItem.content) ? getParagraths(listItem) : <p>{listItem.content}</p>}
-      {getBenefits(listItem)}
-    </li>
+  const getListItems = (item) => item.body.map((list) =>
+    <ListItem className={styles.listItem} popupContent={list.desc}>
+      {Array.isArray(list.content) ? getParagraths(list) : <p>{list.content}</p>}
+      {list.benefits ? getBenefits(list) : undefined}
+    </ListItem>
   );
 
   return (
