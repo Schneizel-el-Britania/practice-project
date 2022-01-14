@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import pricingData from './pricingData.json'
 import styles from './Pricing.module.sass';
 import ListItem from './ListItem';
 
-
 export default function Pricing() {
+
+  const [width, setWidth] = useState(0);
+  const [isHidden, setHidden] = useState(Array(pricingData.length).fill(true));
 
   const getParagraths = (item) => item.content.map((content) =>
     <p className={styles.paragrath}>
@@ -32,21 +34,33 @@ export default function Pricing() {
     </li>
   );
 
+  const bodyClass = (index) => (isHidden[index] && width < 768) ? styles.minimized : styles.extended;
+  const expandBox = (index) => setHidden(() => {
+    const result = [...isHidden];
+    result[index] = !isHidden[index];
+    return result;
+  });
+
+  useEffect(() => {
+    const callback = () => setWidth(window.innerWidth)
+    window.addEventListener('resize', callback);
+    return () => window.removeEventListener('resize', callback);
+  }, [])
+
   return (
     <div className={styles.container}>
       {
-        pricingData.map((item) =>
-          <div>
+        pricingData.map((item, index) =>
+          <div onClick={() => expandBox(index)}>
             <div className={styles.header}>
               <h3 className={styles.title}>{item.header.title}</h3>
               <p>{item.header.desc}</p>
               <p>us${item.header.price}</p>
             </div>
-            <ul className={styles.body}>{getListItems(item)}</ul>
+            <ul className={bodyClass(index)}>{getListItems(item)}</ul>
           </div>
         )
       }
     </div>
-
   )
 }
