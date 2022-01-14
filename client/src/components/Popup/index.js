@@ -3,7 +3,7 @@ import styles from './Popup.module.sass';
 
 export default function Popup({content}) {
   return (
-    <div>
+    <div className={styles.container}>
       <p>{content}</p>
     </div>
   )

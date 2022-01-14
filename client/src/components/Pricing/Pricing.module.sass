@@ -1,11 +1,19 @@
 $space: 1rem
+$border-color: rgb(221, 221, 221)
+$pricing-link-color: #337ab7
 
 .container
+  margin: 3rem 0
   display: flex
   flex-wrap: wrap
+  justify-content: space-around
   >*
-    flex: 1 1 auto
     padding: 0 $space
+    flex-basis: 100%
+    @media screen and (min-width: 550px)
+      flex-basis: 35%
+    @media screen and (min-width: 768px)
+      flex-basis: 20%
 
 .header
   border: 10px solid black
@@ -17,13 +25,18 @@ $space: 1rem
 
 .link
   display: inline
+  text-decoration: none
+  color: $pricing-link-color
 
 .listItem
   padding: $space 0
-  border-bottom: 2px solid rgb(221, 221, 221)
+  border-bottom: 2px solid $border-color
 
 .benefitsItem
-  padding: $space/2 0
+  padding: $space / 2 0
 
 .paragrath + .paragrath
   padding-top: $space
+
+.popupPosition
+  position: relative
