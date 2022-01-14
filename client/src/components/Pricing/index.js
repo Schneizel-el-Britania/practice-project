@@ -16,17 +16,19 @@ export default function Pricing() {
   const getBenefits = (item) =>
     <ul>{
       item.benefits.map((benefit) =>
-        <ListItem className={styles.benefitsItem} popupContent={benefit.desc}>
+        <ListItem type='li' className={styles.benefitsItem} popupContent={benefit.desc}>
           {benefit.content}
         </ListItem>
       )
     }</ul>
 
   const getListItems = (item) => item.body.map((list) =>
-    <ListItem className={styles.listItem} popupContent={list.desc}>
-      {Array.isArray(list.content) ? getParagraths(list) : <p>{list.content}</p>}
+    <li className={styles.listItem}>
+      <ListItem type='p' popupContent={list.desc}>
+        {Array.isArray(list.content) ? getParagraths(list) : list.content}
+      </ListItem>
       {list.benefits ? getBenefits(list) : undefined}
-    </ListItem>
+    </li>
   );
 
   return (
