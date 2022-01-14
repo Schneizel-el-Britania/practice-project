@@ -18,6 +18,7 @@ export default function Pricing() {
       item.benefits.map((benefit) =>
         <ListItem type='li' className={styles.benefitsItem} popupContent={benefit.desc}>
           {benefit.content}
+          <a href={benefit.link?.path} className={styles.link}>{benefit.link?.content}</a>
         </ListItem>
       )
     }</ul>
