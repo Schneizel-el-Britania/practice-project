@@ -16,50 +16,60 @@ $pricing-link-color: #337ab7
       flex-basis: 23%
 
 .box
-  padding: $space / 2
+  padding: 0 $space / 2
   @media screen and (min-width: 768px)
-    max-width: 300px
-  @media screen and (max-width: 768px)
-    border: 10px solid black
+    max-width: 250px
+  @media screen and (max-width: 767px)
+    border: 5px solid black
     &+&
       margin-top: $space
 
 .header
-  >*+*
+  font-size: 1.6rem
+  >*+*:not(i)
     padding-top: $space
-  @media screen and (max-width: 768px)
-    border-bottom: 0.5px solid rgb(221, 221, 221)
+  @media screen and (max-width: 767px)
+    padding: $space
   @media screen and (min-width: 768px)
     border: 10px solid black
-    padding: $space
+    padding: $space * 1.5
 
 .title
   font-weight: 700
-  font-size: 1.6rem
-  @media screen and (max-width: 768px)
+  @media screen and (max-width: 767px)
     display: inline
 
 .desc
   color: #666
-  @media screen and (max-width: 768px)
+  font-size: 1rem
+  @media screen and (max-width: 767px)
     display: none
 
 .price
   font-weight: 700
-  font-size: 1.5rem
   text-transform: uppercase
   @media screen and (min-width: 768px)
     font-weight: 600
-    font-size: 1.6rem
+    font-size: 1.5rem
     text-align: end
-  @media screen and (max-width: 768px)
+  @media screen and (max-width: 767px)
     padding-left: 5px
     display: inline
+
+.minus
+  float: right
+  @media screen and (min-width: 768px)
+    display: none
+
+.body
+  padding: $space
 
 .minimized
   display: none
 .extended
   display: block
+.showBorder
+  border-bottom: 0.5px solid rgb(221, 221, 221)
 
 .link
   display: inline
@@ -67,12 +77,18 @@ $pricing-link-color: #337ab7
   color: $pricing-link-color
 
 .listItem
-  padding: $space 0
   &+&
     border-top: 2px solid $border-color
 
+.mainItem
+  padding: $space 0
+
 .benefitsItem
   padding: $space / 2 0
+  padding-left: $space / 2
+  font-size: 0.8rem
+  i
+    padding-right: 5px
 
 .paragrath + .paragrath
   padding-top: $space

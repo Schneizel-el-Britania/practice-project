@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import cx from 'classnames';
 import pricingData from './pricingData.json'
 import styles from './Pricing.module.sass';
 import ListItem from './ListItem';
@@ -10,7 +11,7 @@ const boxColors = ['#e0b48d', '#e8b954', '#555', '#28d2d0'];
 export default function Pricing() {
 
   const [width, setWidth] = useState(window.innerWidth);
-  const [isHidden, setHidden] = useState(Array(pricingData.length).fill(window.innerWidth < EXTEND_BOX_WIDTH));
+  const [isHidden, setHidden] = useState(Array(pricingData.length).fill(true));
 
   const getParagraths = (item) => item.content.map((content) =>
     <p className={styles.paragrath}>
@@ -23,6 +24,7 @@ export default function Pricing() {
     <ul>{
       item.benefits.map((benefit) =>
         <ListItem type='li' className={styles.benefitsItem} popupContent={benefit.desc}>
+          <i className="fa fa-check" />
           {benefit.content}
           <a href={benefit.link?.path} className={styles.link}>{benefit.link?.content}</a>
         </ListItem>
@@ -31,18 +33,24 @@ export default function Pricing() {
 
   const getListItems = (item) => item.body.map((list) =>
     <li className={styles.listItem}>
-      <ListItem type='p' popupContent={list.desc}>
+      <ListItem type='p' popupContent={list.desc} className={styles.mainItem}>
         {Array.isArray(list.content) ? getParagraths(list) : list.content}
       </ListItem>
       {list.benefits ? getBenefits(list) : undefined}
     </li>
   );
 
-  const bodyClass = (index) => (isHidden[index] && width < EXTEND_BOX_WIDTH) ? styles.minimized : styles.extended;
+  const bodyClasses = (index) => cx(styles.body, (isHidden[index] && width < EXTEND_BOX_WIDTH) ? styles.minimized : styles.extended);
+  const headerClasses = (index) => cx(styles.header, (isHidden[index] || width >= EXTEND_BOX_WIDTH) ? undefined : styles.showBorder);
+  const minusClasses = cx(styles.minus, 'fa fa-minus');
+
   const expandBox = (index) => setHidden(() => {
-    const result = [...isHidden];
-    result[index] = !isHidden[index];
-    return result;
+    if (width < EXTEND_BOX_WIDTH) {
+      const result = [...isHidden];
+      result[index] = !isHidden[index];
+      return result;
+    }
+    return isHidden
   });
 
   useEffect(() => {
@@ -60,15 +68,16 @@ export default function Pricing() {
         pricingData.map((item, index) =>
           <div className={styles.box} style={getBoxColor('borderColor', index)}>
             <div
-              className={styles.header}
-              style={getBoxColor('borderColor', index, (width > EXTEND_BOX_WIDTH))}
+              className={headerClasses(index)}
+              style={getBoxColor('borderColor', index, (width >= EXTEND_BOX_WIDTH))}
               onClick={() => expandBox(index)}
             >
               <h3 className={styles.title} style={getBoxColor('color', index)}>{item.header.title}</h3>
               <p className={styles.desc}>{item.header.desc}</p>
               <p className={styles.price} style={getBoxColor('color', index)}>us${item.header.price}</p>
+              <i className={minusClasses} style={getBoxColor('color', index)}></i>
             </div>
-            <ul className={bodyClass(index)}>
+            <ul className={bodyClasses(index)}>
               {getListItems(item)}
               <button className={styles.button} style={getBoxColor('backgroundColor', index)}>start</button>
             </ul>
