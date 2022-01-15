@@ -1,0 +1,40 @@
+@import '../../../common/styles/variables'
+@import '../../../common/styles/colors'
+
+%inline-header
+  font-weight: 700
+  @media screen and (max-width: 767px)
+    display: inline
+
+.header
+  padding: $space
+  font-size: 1.6rem
+  > * + *:not(i)
+    padding-top: $space
+  @media screen and (min-width: 768px)
+    border: 10px solid black
+    padding: $space * 1.5
+
+.title
+  @extend %inline-header
+
+.desc
+  color: $pricing-desc-color
+  font-size: 1rem
+  @media screen and (max-width: 767px)
+    display: none
+
+.price
+  @extend %inline-header
+  text-transform: uppercase
+  @media screen and (min-width: 768px)
+    font-weight: 600
+    font-size: 1.5rem
+    text-align: end
+  @media screen and (max-width: 767px)
+    padding-left: 5px
+
+.minus
+  float: right
+  @media screen and (min-width: 768px)
+    display: none

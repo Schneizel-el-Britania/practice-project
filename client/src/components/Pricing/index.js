@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import cx from 'classnames';
 import pricingData from './pricingData.json'
-import styles from './Pricing.module.sass';
 import ListItem from './ListItem';
+import styles from './Pricing.module.sass';
 import CONSTANTS from '../../constants';
+import Header from './Header';
 const { EXTEND_BOX_WIDTH } = CONSTANTS;
 
 const boxColors = ['#e0b48d', '#e8b954', '#555', '#28d2d0'];
@@ -41,17 +42,6 @@ export default function Pricing() {
   );
 
   const bodyClasses = (index) => cx(styles.body, (isHidden[index] && width < EXTEND_BOX_WIDTH) ? styles.minimized : styles.extended);
-  const headerClasses = (index) => cx(styles.header, (isHidden[index] || width >= EXTEND_BOX_WIDTH) ? undefined : styles.showBorder);
-  const minusClasses = cx(styles.minus, 'fa fa-minus');
-
-  const expandBox = (index) => setHidden(() => {
-    if (width < EXTEND_BOX_WIDTH) {
-      const result = [...isHidden];
-      result[index] = !isHidden[index];
-      return result;
-    }
-    return isHidden
-  });
 
   useEffect(() => {
     const callback = () => setWidth(window.innerWidth)
@@ -59,24 +49,20 @@ export default function Pricing() {
     return () => window.removeEventListener('resize', callback);
   }, [])
 
-  const getBoxColor = (property, index, condition = true) =>
-    ({ [property]: condition ? boxColors[index] : undefined });
+  const getBoxColor = (property, index) =>
+    ({ [property]: boxColors[index] });
 
   return (
     <div className={styles.container}>
       {
         pricingData.map((item, index) =>
           <div className={styles.box} style={getBoxColor('borderColor', index)}>
-            <div
-              className={headerClasses(index)}
-              style={getBoxColor('borderColor', index, (width >= EXTEND_BOX_WIDTH))}
-              onClick={() => expandBox(index)}
-            >
-              <h3 className={styles.title} style={getBoxColor('color', index)}>{item.header.title}</h3>
-              <p className={styles.desc}>{item.header.desc}</p>
-              <p className={styles.price} style={getBoxColor('color', index)}>us${item.header.price}</p>
-              <i className={minusClasses} style={getBoxColor('color', index)}></i>
-            </div>
+            <Header
+              width={width}
+              isHiddenItem={isHidden[item]} setHidden={setHidden}
+              index={index} headerContent={item.header}
+              getBoxColor={getBoxColor}
+            />
             <ul className={bodyClasses(index)}>
               {getListItems(item)}
               <button className={styles.button} style={getBoxColor('backgroundColor', index)}>start</button>
