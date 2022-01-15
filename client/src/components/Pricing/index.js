@@ -55,8 +55,8 @@ export default function Pricing() {
     <div className={styles.container}>
       {
         pricingData.map((item, index) =>
-          <div className={styles.box} style={{ borderColor: boxColors[index] }} onClick={() => expandBox(index)}>
-            <div className={styles.header} style={{ borderColor: boxColors[index] }}>
+          <div className={styles.box} style={{ borderColor: boxColors[index] }} >
+            <div className={styles.header} style={{ borderColor: boxColors[index] }} onClick={() => expandBox(index)}>
               <h3 className={styles.title}>{item.header.title}</h3>
               <p>{item.header.desc}</p>
               <p>us${item.header.price}</p>
