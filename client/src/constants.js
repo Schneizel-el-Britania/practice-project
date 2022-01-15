@@ -2,7 +2,7 @@ const env = process.env.NODE_ENV || 'development'
 const serverIP = 'localhost'
 const serverPort = 5000
 export default {
-  CONTACTS:{
+  CONTACTS: {
     PHONE: '(877) 355-3585',
   },
   CUSTOMER: 'customer',
@@ -79,5 +79,6 @@ export default {
       title: 'LEGAL',
       items: ['Terms of Service', 'Privacy Policy', 'Cookie Policy']
     }
-  ]
+  ],
+  EXTEND_BOX_WIDTH: 768
 }
