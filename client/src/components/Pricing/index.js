@@ -9,7 +9,7 @@ const boxColors = ['#e0b48d', '#e8b954', '#555', '#28d2d0'];
 
 export default function Pricing() {
 
-  const [width, setWidth] = useState(0);
+  const [width, setWidth] = useState(window.innerWidth);
   const [isHidden, setHidden] = useState(Array(pricingData.length).fill(window.innerWidth < EXTEND_BOX_WIDTH));
 
   const getParagraths = (item) => item.content.map((content) =>
@@ -51,19 +51,26 @@ export default function Pricing() {
     return () => window.removeEventListener('resize', callback);
   }, [])
 
+  const getBoxColor = (property, index, condition = true) =>
+    ({ [property]: condition ? boxColors[index] : undefined });
+
   return (
     <div className={styles.container}>
       {
         pricingData.map((item, index) =>
-          <div className={styles.box} style={{ borderColor: boxColors[index] }} >
-            <div className={styles.header} style={{ borderColor: boxColors[index] }} onClick={() => expandBox(index)}>
-              <h3 className={styles.title}>{item.header.title}</h3>
-              <p>{item.header.desc}</p>
-              <p>us${item.header.price}</p>
+          <div className={styles.box} style={getBoxColor('borderColor', index)}>
+            <div
+              className={styles.header}
+              style={getBoxColor('borderColor', index, (width > EXTEND_BOX_WIDTH))}
+              onClick={() => expandBox(index)}
+            >
+              <h3 className={styles.title} style={getBoxColor('color', index)}>{item.header.title}</h3>
+              <p className={styles.desc}>{item.header.desc}</p>
+              <p className={styles.price} style={getBoxColor('color', index)}>us${item.header.price}</p>
             </div>
             <ul className={bodyClass(index)}>
               {getListItems(item)}
-              <button className={styles.button} style={{ backgroundColor: boxColors[index] }}>start</button>
+              <button className={styles.button} style={getBoxColor('backgroundColor', index)}>start</button>
             </ul>
           </div>
         )

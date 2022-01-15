@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500;600;700&display=swap')
 $space: 1rem
 $border-color: rgb(221, 221, 221)
 $pricing-link-color: #337ab7
@@ -6,21 +7,54 @@ $pricing-link-color: #337ab7
   margin: 3rem 0
   display: flex
   flex-wrap: wrap
-  justify-content: space-around
-  >*
-    padding: 0 $space
+  justify-content: center
+  font-size: 0.9rem
+  font-family: 'Raleway',sans-serif
+  > *
     flex-basis: 100%
     @media screen and (min-width: 768px)
-      flex-basis: 20%
+      flex-basis: 23%
 
 .box
-  padding: 1rem
+  padding: $space / 2
+  @media screen and (min-width: 768px)
+    max-width: 300px
   @media screen and (max-width: 768px)
     border: 10px solid black
+    &+&
+      margin-top: $space
 
 .header
+  >*+*
+    padding-top: $space
+  @media screen and (max-width: 768px)
+    border-bottom: 0.5px solid rgb(221, 221, 221)
   @media screen and (min-width: 768px)
     border: 10px solid black
+    padding: $space
+
+.title
+  font-weight: 700
+  font-size: 1.6rem
+  @media screen and (max-width: 768px)
+    display: inline
+
+.desc
+  color: #666
+  @media screen and (max-width: 768px)
+    display: none
+
+.price
+  font-weight: 700
+  font-size: 1.5rem
+  text-transform: uppercase
+  @media screen and (min-width: 768px)
+    font-weight: 600
+    font-size: 1.6rem
+    text-align: end
+  @media screen and (max-width: 768px)
+    padding-left: 5px
+    display: inline
 
 .minimized
   display: none
@@ -34,9 +68,8 @@ $pricing-link-color: #337ab7
 
 .listItem
   padding: $space 0
-
-.listItem + .listItem
-  border-top: 2px solid $border-color
+  &+&
+    border-top: 2px solid $border-color
 
 .benefitsItem
   padding: $space / 2 0
