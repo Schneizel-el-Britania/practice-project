@@ -2,11 +2,15 @@ import React, { useEffect, useState } from 'react';
 import pricingData from './pricingData.json'
 import styles from './Pricing.module.sass';
 import ListItem from './ListItem';
+import CONSTANTS from '../../constants';
+const { EXTEND_BOX_WIDTH } = CONSTANTS;
+
+const boxColors = ['#e0b48d', '#e8b954', '#555', '#28d2d0'];
 
 export default function Pricing() {
 
   const [width, setWidth] = useState(0);
-  const [isHidden, setHidden] = useState(Array(pricingData.length).fill(true));
+  const [isHidden, setHidden] = useState(Array(pricingData.length).fill(window.innerWidth < EXTEND_BOX_WIDTH));
 
   const getParagraths = (item) => item.content.map((content) =>
     <p className={styles.paragrath}>
@@ -34,7 +38,7 @@ export default function Pricing() {
     </li>
   );
 
-  const bodyClass = (index) => (isHidden[index] && width < 768) ? styles.minimized : styles.extended;
+  const bodyClass = (index) => (isHidden[index] && width < EXTEND_BOX_WIDTH) ? styles.minimized : styles.extended;
   const expandBox = (index) => setHidden(() => {
     const result = [...isHidden];
     result[index] = !isHidden[index];
@@ -51,13 +55,16 @@ export default function Pricing() {
     <div className={styles.container}>
       {
         pricingData.map((item, index) =>
-          <div onClick={() => expandBox(index)}>
-            <div className={styles.header}>
+          <div className={styles.box} style={{ borderColor: boxColors[index] }} onClick={() => expandBox(index)}>
+            <div className={styles.header} style={{ borderColor: boxColors[index] }}>
               <h3 className={styles.title}>{item.header.title}</h3>
               <p>{item.header.desc}</p>
               <p>us${item.header.price}</p>
             </div>
-            <ul className={bodyClass(index)}>{getListItems(item)}</ul>
+            <ul className={bodyClass(index)}>
+              {getListItems(item)}
+              <button className={styles.button} style={{ backgroundColor: boxColors[index] }}>start</button>
+            </ul>
           </div>
         )
       }
