@@ -13,3 +13,15 @@ $border-color: rgb(221, 221, 221)
   right: -$popup-width * 1.2
   top: -50%
   z-index: 999
+
+.arrow
+  color: $border-color
+  background-color: $popup-bg-color
+  clip-path: polygon(75% 0, 100% 0, 100% 100%, 75% 100%, 0% 50%)
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.2)
+  font-size: 1.3rem
+
+  position: absolute
+  top: 50%
+  transform: translateY(-50%)
+  left: -10px
