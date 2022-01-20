@@ -24,7 +24,7 @@ export default function Pricing() {
     <div className={styles.container}>
       {
         pricingData.map((item, index) =>
-          <div className={styles.box} style={getBoxColor('borderColor', index)}>
+          <div className={styles.box} style={getBoxColor('borderColor', index)} key={index}>
             <Header
               width={width}
               isHiddenItem={isHidden[index]} setHidden={setHidden}

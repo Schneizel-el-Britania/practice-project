@@ -9,8 +9,8 @@ const { EXTEND_BOX_WIDTH } = CONSTANTS;
 export default function Body(props) {
   const { isHiddenItem, width, getBoxColor, index, bodyContent } = props;
 
-  const getParagraths = (item) => item.content.map((content) =>
-    <p className={styles.paragrath}>
+  const getParagraths = (item) => item.content.map((content, index) =>
+    <p className={styles.paragrath} key={index}>
       {content.paragraph}
       <a href={content.link?.path} className={styles.link}>{content.link?.content}</a>
     </p>
@@ -18,8 +18,8 @@ export default function Body(props) {
 
   const getBenefits = (item) =>
     <ul>{
-      item.benefits.map((benefit) =>
-        <ListItem type='li' className={styles.benefitsItem} popupContent={benefit.desc}>
+      item.benefits.map((benefit, index) =>
+        <ListItem type='li' itemKey={index} key={index} className={styles.benefitsItem} popupContent={benefit.desc}>
           <i className="fa fa-check" />
           {benefit.content}
           <a href={benefit.link?.path} className={styles.link}>{benefit.link?.content}</a>
@@ -27,9 +27,9 @@ export default function Body(props) {
       )
     }</ul>
 
-  const getListItems = bodyContent.map((list) =>
-    <li className={styles.listItem}>
-      <ListItem type='p' popupContent={list.desc} className={styles.mainItem}>
+  const getListItems = bodyContent.map((list, index) =>
+    <li className={styles.listItem} key={index}>
+      <ListItem type='p' itemKey={index} popupContent={list.desc} className={styles.mainItem}>
         {Array.isArray(list.content) ? getParagraths(list) : list.content}
       </ListItem>
       {list.benefits ? getBenefits(list) : undefined}
