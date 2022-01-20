@@ -1,8 +1,8 @@
 import React, { createElement, useRef } from 'react';
 import cx from 'classnames';
-import { useHover } from '../../hooks';
-import Popup from '../Popup';
-import styles from './Pricing.module.sass'
+import Popup from '../../Popup';
+import { useHover } from '../../../hooks';
+import styles from './ListItem.module.sass'
 
 
 export default function ListItem(props) {
