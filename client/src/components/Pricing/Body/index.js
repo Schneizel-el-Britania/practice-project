@@ -29,7 +29,7 @@ export default function Body(props) {
 
   const getListItems = bodyContent.map((list, index) =>
     <li className={styles.listItem} key={index}>
-      <ListItem type='p' itemKey={index} popupContent={list.desc} className={styles.mainItem}>
+      <ListItem type='article' itemKey={index} popupContent={list.desc} className={styles.mainItem}>
         {Array.isArray(list.content) ? getParagraths(list) : list.content}
       </ListItem>
       {list.benefits ? getBenefits(list) : undefined}
